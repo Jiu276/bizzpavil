@@ -14,9 +14,8 @@ export const posts: BlogPost[] = [
     author: "Marcus Webb",
     date: "2026-11-06",
     readTime: 8,
-    image:
-      "https://images.unsplash.com/photo-1554224311-beee415c201f?w=1200&q=80",
-    imageAlt: "Person reviewing loan options on a laptop at home",
+    image: "/blog/upstart/hero.jpg",
+    imageAlt: "Person reviewing loan and credit options on a laptop",
     tags: ["Upstart", "personal loans", "credit", "rate check", "lending"],
     featured: true,
     content: `
@@ -44,7 +43,7 @@ According to [Upstart](http://upstart.com)'s own FAQ—not our interpretation—
 
 None of that is exotic. What's different is how loud they've made the first bullet. Their homepage repeats "Won't affect your credit score" like a chorus. In a crowded lending market, clarity *is* the product feature.
 
-![Checking a loan rate on a phone without submitting a full application](https://images.unsplash.com/photo-1563986768605-319da155575d?w=1200&q=80)
+![Checking a loan rate on a phone without submitting a full application](/blog/upstart/phone-rate-check.jpg)
 
 ## The three-step funnel, and where people still stumble
 
@@ -54,7 +53,7 @@ Where borrowers get tripped up isn't the soft pull; it's the **hard pull at acce
 
 Published rates on the site have spanned roughly **6.1% to 35.99% APR** on five-year unsecured loans (actual offers depend on credit, income, and other application data—not everyone qualifies for the low end). Comparing **APR** to **interest rate** still matters; origination fees land inside APR, which is the apples-to-apples figure when you're shopping.
 
-![Financial paperwork and calculator on a desk during loan comparison](https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80)
+![Financial paperwork and calculator on a desk during loan comparison](/blog/upstart/loan-comparison.jpg)
 
 ## Soft pull vs. hard pull—a quick reference
 
@@ -66,7 +65,7 @@ Published rates on the site have spanned roughly **6.1% to 35.99% APR** on five-
 
 If you're rate-shopping multiple lenders, stacking soft pulls in a two-week window is generally friendlier than stacking hard pulls. Upstart isn't the only player with soft pre-qualification, but their messaging trained a lot of first-time visitors to expect it everywhere—which raises the bar for competitors.
 
-![Credit score report concept on a desk](https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&q=80)
+![Credit analytics and score factors on a laptop screen](/blog/upstart/credit-report.jpg)
 
 ## Who this is actually for
 
@@ -80,7 +79,7 @@ It may *not* fit if you're using [personal loans](http://upstart.com) to patch c
 
 The platform also offers other products (Cash Line, HELOC through home lending, short-term relief loans) with different terms. This piece focuses on the rate-check story because that's what the four words on the homepage change: **willingness to look.**
 
-![Cash and card on a table after approved personal loan funding](https://images.unsplash.com/photo-1576956099186-e21e2079d3e8?w=1200&q=80)
+![Contactless payment after an approved personal loan](/blog/upstart/loan-funding.jpg)
 
 ## The bigger shift in lending UX
 

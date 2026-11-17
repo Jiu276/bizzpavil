@@ -97,6 +97,7 @@ export function BlogContent({ content }: { content: string }) {
       if (imageMatch) {
         flushList();
         const [, alt, src] = imageMatch;
+        const isRemote = src.startsWith("http");
         elements.push(
           <figure
             key={index}
@@ -107,6 +108,7 @@ export function BlogContent({ content }: { content: string }) {
                 src={src}
                 alt={alt}
                 fill
+                unoptimized={isRemote}
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 672px"
               />

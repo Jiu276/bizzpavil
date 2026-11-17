@@ -56,6 +56,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           alt={post.imageAlt}
           fill
           priority
+          unoptimized={post.image.startsWith("http")}
           className="object-cover"
           sizes="100vw"
         />
