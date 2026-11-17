@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 /**
  * Renders markdown-style blog content as styled HTML.
  */
@@ -89,6 +92,33 @@ export function BlogContent({ content }: { content: string }) {
       );
     } else if (trimmed.startsWith("- ")) {
       listItems.push(trimmed.slice(2));
+    } else if (/^!\[.*\]\(.*\)$/.test(trimmed)) {
+      const imageMatch = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (imageMatch) {
+        flushList();
+        const [, alt, src] = imageMatch;
+        elements.push(
+          <figure
+            key={index}
+            className="my-8 overflow-hidden rounded-2xl border border-border bg-surface"
+          >
+            <div className="relative aspect-[16/10] w-full">
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 672px"
+              />
+            </div>
+            {alt ? (
+              <figcaption className="border-t border-border px-4 py-3 text-center text-xs text-muted">
+                {alt}
+              </figcaption>
+            ) : null}
+          </figure>
+        );
+      }
     } else if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
       flushList();
       elements.push(
@@ -113,17 +143,66 @@ export function BlogContent({ content }: { content: string }) {
 }
 
 /**
- * Renders inline bold markers within a text string.
+ * Renders inline bold and markdown links within a text string.
  */
 function renderInline(text: string): React.ReactNode {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(
+        ...renderBoldSegments(text.slice(lastIndex, match.index), key)
+      );
+      key += 50;
+    }
+    const href = match[2];
+    const isExternal = href.startsWith("http");
+    nodes.push(
+      isExternal ? (
+        <a
+          key={`link-${key++}`}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent-dark hover:decoration-accent"
+        >
+          {match[1]}
+        </a>
+      ) : (
+        <Link
+          key={`link-${key++}`}
+          href={href}
+          className="font-medium text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:text-accent-dark"
+        >
+          {match[1]}
+        </Link>
+      )
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(...renderBoldSegments(text.slice(lastIndex), key));
+  }
+
+  if (nodes.length === 0) return text;
+  if (nodes.length === 1) return nodes[0];
+  return nodes;
+}
+
+function renderBoldSegments(text: string, keyOffset: number): React.ReactNode[] {
   const parts = text.split(/\*\*(.*?)\*\*/g);
   return parts.map((part, i) =>
     i % 2 === 1 ? (
-      <strong key={i} className="font-semibold text-foreground">
+      <strong key={`b-${keyOffset + i}`} className="font-semibold text-foreground">
         {part}
       </strong>
     ) : (
-      part
+      <span key={`t-${keyOffset + i}`}>{part}</span>
     )
   );
 }
